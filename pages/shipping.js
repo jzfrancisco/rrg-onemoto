@@ -16,7 +16,6 @@ export default function ShippingScreen() {
     register,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm();
 
   useEffect(() => {
@@ -108,3 +107,5 @@ export default function ShippingScreen() {
     </Layout>
   );
 }
+
+ShippingScreen.auth = true;
