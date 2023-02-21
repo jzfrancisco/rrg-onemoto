@@ -64,7 +64,11 @@ export default function ShippingScreen() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="fullName">Address</label>
+          <label htmlFor="fullName">Enter your full address </label>
+          <h1>
+            <span className="text-xl font-bold">Note:</span> If your address is
+            not valid your order will be cancelled
+          </h1>
           <input
             className="w-full"
             id="address"
