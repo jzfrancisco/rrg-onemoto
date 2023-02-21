@@ -1,7 +1,7 @@
 import User from "../../models/Users";
 import db from "../../utils/db";
 import data from "../../utils/data";
-import Product from "../../models/Products";
+import Product from "../../models/Product";
 
 const handler = async (req, res) => {
   await db.connect();
