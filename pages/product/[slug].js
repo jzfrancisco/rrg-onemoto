@@ -10,26 +10,27 @@ import db from "../../utils/db";
 import { Store } from "../../utils/Store";
 
 export default function ProductScreen(props) {
-  const { product } = props;
+  const { products } = props;
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
-
-  if (!product) {
-    return <Layout>Product not found</Layout>;
+  if (!products) {
+    return <Layout title="Product not found">Product not found</Layout>;
   }
   const addToCartHandler = async () => {
-    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const existItem = state.cart.cartItems.find(
+      (x) => x.slug === products.slug
+    );
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product.id}`);
+    const { data } = await axios.get(`/api/products/${products._id}`);
 
-    if (product.countInStock < quantity) {
+    if (data.countInStock < quantity) {
       alert("Sorry. Product is out of stock");
     }
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
+    dispatch({ type: "CART_ADD_ITEM", payload: { ...products, quantity } });
     router.push("/cart");
   };
   return (
-    <Layout title={product.name}>
+    <Layout title={products.name}>
       <div className="py-2">
         <Link href="/">Back to products</Link>
       </div>
@@ -37,8 +38,8 @@ export default function ProductScreen(props) {
         <div className="md:col-span-2">
           <p className="h-44  p-2 rounded-lg overflow-hidden relative ">
             <Image
-              src={product.image}
-              alt={product.name}
+              src={products.image}
+              alt={products.name}
               fill
               style={{
                 objectFit: "contain",
@@ -51,24 +52,24 @@ export default function ProductScreen(props) {
         <div>
           <ul>
             <li>
-              <h1 className="text-lg">{product.name}</h1>
+              <h1 className="text-lg">{products.name}</h1>
             </li>
-            <li>Category: {product.category}</li>
-            <li>Brand: {product.brand}</li>
+            <li>Category: {products.category}</li>
+            <li>Brand: {products.brand}</li>
             <li>
-              {product.rating} of {product.numReviews} reviews
+              {products.rating} of {products.numReviews} reviews
             </li>
-            <li>Description: {product.description}</li>
+            <li>Description: {products.description}</li>
           </ul>
         </div>
         <div className="card p-5">
           <div className="mb-2 flex justify-between">
             <div>Price</div>
-            <div>₱{product.price}</div>
+            <div>₱{products.price}</div>
           </div>
           <div className="mb-2 flex justify-between">
             <div>Status</div>
-            <div>{product.countInStock > 0 ? "In stock" : "Unavailable"}</div>
+            <div>{products.countInStock > 0 ? "In stock" : "Unavailable"}</div>
           </div>
           <button className="primary-button w-full" onClick={addToCartHandler}>
             Add to cart
