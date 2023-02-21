@@ -22,7 +22,7 @@ export default function PlaceOrderScreen() {
 
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const taxPrice = round2(itemsPrice * 0.15);
-  const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
+  const totalPrice = round2(itemsPrice + 200 + taxPrice);
 
   const router = useRouter();
   useEffect(() => {
@@ -150,7 +150,7 @@ export default function PlaceOrderScreen() {
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Shipping</div>
-                    <div>₱{shippingPrice}</div>
+                    <div>₱200</div>
                   </div>
                 </li>
                 <li>
