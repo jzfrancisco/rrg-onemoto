@@ -26,7 +26,7 @@
     "pages/index.js",
     "utils/Store.js",
     "utils/db.jsx",
-    "pages/api/orders/[id].js"
+    "pages/api/orders/index.js"
   ],
   "exclude": ["node_modules"]
 }
