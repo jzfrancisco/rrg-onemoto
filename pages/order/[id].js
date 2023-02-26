@@ -2,10 +2,11 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Layout from "../../components/Layout";
 import { getError } from "../../utils/error";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -15,6 +16,8 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "PAY_SUCCESS":
+      return { ...state, loadingPay: false, successPay: true };
     default:
       state;
   }
@@ -23,6 +26,7 @@ function reducer(state, action) {
 function OrderScreen() {
   const { query } = useRouter();
   const orderId = query.id;
+  const [isPending, setIsPending] = useState(false);
 
   const [
     { loading, error, order, successPay, loadingDeliver, successDeliver },
@@ -38,7 +42,7 @@ function OrderScreen() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(`/api/orders/${orderId}`);
-        dispatch({ type: "FETCH_REQUEST", payload: data });
+        dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
@@ -62,6 +66,38 @@ function OrderScreen() {
     deliveredAt,
   } = order;
 
+  function createOrder(data, actions) {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: { value: totalPrice },
+          },
+        ],
+      })
+      .then((orderID) => {
+        return orderID;
+      });
+  }
+
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        dispatch({ type: "PAY_REQUEST" });
+        const { data } = await axios.put(
+          `/api/orders/${order._id}/pay`,
+          details
+        );
+      } catch (err) {
+        dispatch({ type: "PAY_FAIL", payload: getError(err) });
+        toast.error(getError(err));
+      }
+    });
+  }
+
+  function onError(err) {
+    toast.error(getError(err));
+  }
   return (
     <Layout title={`Order ${orderId}`}>
       <h1 className="mb-4 text-xl ">{`Order ${orderId}`}</h1>
@@ -75,13 +111,21 @@ function OrderScreen() {
             <div className="card p-5">
               <h2 className="mb-2 text-lg">Shipping Address</h2>
               <div>
-                {shippingAddress.fullName},{shippingAddress.address},{" "}
+                {shippingAddress.fullName},{shippingAddress.address},
                 {shippingAddress.contactNumber}
               </div>
               {isdDelivered ? (
                 <div className="alert-success">Delivered at {deliveredAt}</div>
               ) : (
                 <div className="alert-error">Not delivered</div>
+              )}
+            </div>
+            <div className="card p-5">
+              <h2 className="mb-2 text-lg">Payment Method</h2>
+              {isPaid ? (
+                <div className="alert-success">Paid at {paidAt}</div>
+              ) : (
+                <div className="alert-error">Cash on delivery</div>
               )}
             </div>
             <div className="card overflow-x-auto p-5">
@@ -101,7 +145,7 @@ function OrderScreen() {
                       <td>
                         <Link href={`/product/${item.slug}`}>
                           <div className="flex items-center">
-                            <p className="h-20 p-6 rounded-lg overflow-hidden relative ">
+                            <div className="h-20 p-6 rounded-lg overflow-hidden relative ">
                               <Image
                                 src={item.image}
                                 alt={item.name}
@@ -112,12 +156,12 @@ function OrderScreen() {
                                 }}
                                 className="rounded shadow"
                               />
-                            </p>
+                            </div>
                           </div>
                         </Link>
                       </td>
                       <td className="p-5 text-right">{item.quantity}</td>
-                      <td className="p-5 text-right">₱{item.quantity}</td>
+                      <td className="p-5 text-right">₱{item.price}</td>
                       <td className="p-5 text-right">
                         ₱{item.quantity * item.price}
                       </td>
@@ -145,7 +189,7 @@ function OrderScreen() {
                 </li>
                 <li className="mb-2 flex justify-between">
                   <div>Shipping</div>
-                  <div>₱{shippingPrice}</div>
+                  <div>₱200</div>
                 </li>
                 <li>
                   <div className="mb-2 flex justify-between">

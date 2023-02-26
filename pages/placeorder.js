@@ -76,7 +76,7 @@ export default function PlaceOrderScreen() {
               <h2 className="mb-2 text-lg">Shipping Address</h2>
               <div>
                 {shippingAddress.fullName}, {shippingAddress.address},{" "}
-                {shippingAddress.city}
+                {shippingAddress.contactNumber}
               </div>
               <div>
                 <Link href="/shipping">Edit</Link>
@@ -160,12 +160,13 @@ export default function PlaceOrderScreen() {
                   </div>
                 </li>
                 <li>
+                  {loading ? "Loading..." : "Place Order"}
                   <button
                     disabled={loading}
                     onClick={placeOrderHandler}
                     className="primary-button w-full"
                   >
-                    {loading ? "Loading..." : "Place Order"}
+                    Deliver order
                   </button>
                 </li>
               </ul>
