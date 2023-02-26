@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import Layout from "../../components/Layout";
 import { getError } from "../../utils/error";
 import Image from "next/image";
@@ -35,16 +35,16 @@ function OrderScreen() {
   const { data: session } = useSession();
   const { query } = useRouter();
   const orderId = query.id;
-  const [isPending, setIsPending] = useState(false);
+  // const [isPending, setIsPending] = useState(false);
 
-  const [
-    { loading, error, order, successPay, loadingDeliver, successDeliver },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    order: {},
-    error: "",
-  });
+  const [{ loading, error, order, loadingDeliver }, dispatch] = useReducer(
+    reducer,
+    {
+      loading: true,
+      order: {},
+      error: "",
+    }
+  );
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -63,7 +63,7 @@ function OrderScreen() {
 
   const {
     shippingAddress,
-    paymentMethod,
+
     orderItems,
     itemsPrice,
     taxPrice,
@@ -75,19 +75,19 @@ function OrderScreen() {
     deliveredAt,
   } = order;
 
-  function createOrder(data, actions) {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            amount: { value: totalPrice },
-          },
-        ],
-      })
-      .then((orderID) => {
-        return orderID;
-      });
-  }
+  // function createOrder(data, actions) {
+  //   return actions.order
+  //     .create({
+  //       purchase_units: [
+  //         {
+  //           amount: { value: totalPrice },
+  //         },
+  //       ],
+  //     })
+  //     .then((orderID) => {
+  //       return orderID;
+  //     });
+  // }
 
   async function deliverOrderHandler() {
     try {
@@ -104,24 +104,24 @@ function OrderScreen() {
     }
   }
 
-  function onApprove(data, actions) {
-    return actions.order.capture().then(async function (details) {
-      try {
-        dispatch({ type: "PAY_REQUEST" });
-        const { data } = await axios.put(
-          `/api/orders/${order._id}/pay`,
-          details
-        );
-      } catch (err) {
-        dispatch({ type: "PAY_FAIL", payload: getError(err) });
-        toast.error(getError(err));
-      }
-    });
-  }
+  // function onApprove(data, actions) {
+  //   return actions.order.capture().then(async function (details) {
+  //     try {
+  //       dispatch({ type: "PAY_REQUEST" });
+  //       const { data } = await axios.put(
+  //         `/api/orders/${order._id}/pay`,
+  //         details
+  //       );
+  //     } catch (err) {
+  //       dispatch({ type: "PAY_FAIL", payload: getError(err) });
+  //       toast.error(getError(err));
+  //     }
+  //   });
+  // }
 
-  function onError(err) {
-    toast.error(getError(err));
-  }
+  // function onError(err) {
+  //   toast.error(getError(err));
+  // }
   return (
     <Layout title={`Order ${orderId}`}>
       <h1 className="mb-4 text-xl ">{`Order ${orderId}`}</h1>
