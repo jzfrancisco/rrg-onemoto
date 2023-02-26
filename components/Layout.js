@@ -37,9 +37,9 @@ export default function Layout({ title, children }) {
             <Link href="/">
               <h1 className="text-lg font-bold">RRG Motoshop</h1>
             </Link>
-            <div className="flex items-center text-xl">
+            <div className="flex  items-center text-xl">
               <Link href="/cart">
-                <h1 className="p-2">
+                <h1 className="p-2 ">
                   Cart
                   {cartItemsCount > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">

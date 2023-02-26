@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { Store } from "../utils/Store";
+import PlaceOrderScreen from "./placeorder";
 
 export default function PaymentScreen() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
@@ -42,7 +43,7 @@ export default function PaymentScreen() {
     <Layout title="Payment Method">
       <CheckoutWizard activeStep={2} />
       <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
-        {["CashOnDelivery", "Gcash"].map((payment) => (
+        {["Cash On Delivery"].map((payment) => (
           <div key={payment} className="mb-4">
             <input
               name="paymentMethod"
@@ -68,3 +69,5 @@ export default function PaymentScreen() {
     </Layout>
   );
 }
+
+PaymentScreen.auth = true;

@@ -24,7 +24,7 @@ function Productitem({ products, addToCartHandler }) {
           <h2 className="text-lg">{products.name}</h2>
         </Link>
         <p>{products.brand}</p>
-        <p>₱ {products.price}</p>
+        <p>₱{products.price}</p>
         <button
           className="primary-button"
           type="button"

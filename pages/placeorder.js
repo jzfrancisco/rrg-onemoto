@@ -1,14 +1,15 @@
-import axios from "axios";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-import React, { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import CheckoutWizard from "../components/CheckoutWizard";
+"use client";
+import React, { useContext, useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import { getError } from "../utils/error";
+import CheckoutWizard from "../components/CheckoutWizard";
+import Link from "next/link";
 import { Store } from "../utils/Store";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { getError } from "../utils/error";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function PlaceOrderScreen() {
   const { state, dispatch } = useContext(Store);
@@ -18,13 +19,13 @@ export default function PlaceOrderScreen() {
 
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
-  ); // 123.4567 => 123.46
-
+  );
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const taxPrice = round2(itemsPrice * 0.15);
-  const totalPrice = round2(itemsPrice + 200 + taxPrice);
+  const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
 
   const router = useRouter();
+
   useEffect(() => {
     if (!paymentMethod) {
       router.push("/payment");
@@ -60,7 +61,6 @@ export default function PlaceOrderScreen() {
       toast.error(getError(err));
     }
   };
-
   return (
     <Layout title="Place Order">
       <CheckoutWizard activeStep={3} />
@@ -76,7 +76,7 @@ export default function PlaceOrderScreen() {
               <h2 className="mb-2 text-lg">Shipping Address</h2>
               <div>
                 {shippingAddress.fullName}, {shippingAddress.address},{" "}
-                {shippingAddress.contactNumber},
+                {shippingAddress.city}
               </div>
               <div>
                 <Link href="/shipping">Edit</Link>
@@ -150,7 +150,7 @@ export default function PlaceOrderScreen() {
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Shipping</div>
-                    <div>₱200</div>
+                    <div>₱{shippingPrice}</div>
                   </div>
                 </li>
                 <li>
@@ -176,3 +176,5 @@ export default function PlaceOrderScreen() {
     </Layout>
   );
 }
+
+PlaceOrderScreen.auth = true;
