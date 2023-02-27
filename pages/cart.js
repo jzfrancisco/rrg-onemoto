@@ -112,4 +112,5 @@ function CartScreen() {
     </Layout>
   );
 }
+// eslint-disable-next-line no-undef
 export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
