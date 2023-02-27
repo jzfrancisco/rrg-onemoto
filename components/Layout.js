@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 
 export default function Layout({ title, children }) {
   const { Status, data: session } = useSession();
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const { cart } = state;
   const [cartItemsCount, setCartItemsCount] = useState(0);
   useEffect(() => {

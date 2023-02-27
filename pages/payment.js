@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { Store } from "../utils/Store";
-import PlaceOrderScreen from "./placeorder";
 
 export default function PaymentScreen() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
