@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/Layout";
 
 export default function unauthorized() {
-  const router = useRouter();
+  const router = useRouter;
   const { message } = router.query;
   return (
     <Layout title="Unauthorized Page">
