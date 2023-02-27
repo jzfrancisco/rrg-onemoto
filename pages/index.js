@@ -1,8 +1,9 @@
+"use client";
 import Layout from "../components/Layout";
 import ProductItem from "../components/Productitem";
 import db from "../utils/db";
 import Product from "../models/Product";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Store } from "@/utils/Store";
 import axios from "axios";
 import { toast } from "react-toastify";

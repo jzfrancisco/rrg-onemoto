@@ -1,3 +1,4 @@
+"use client";
 import "@/styles/globals.css";
 import { StoreProvider } from "@/utils/Store";
 import { SessionProvider, useSession } from "next-auth/react";

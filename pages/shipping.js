@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext, useEffect } from "react";
 import Layout from "../components/Layout";
 import CheckoutWizard from "../components/CheckoutWizard";
