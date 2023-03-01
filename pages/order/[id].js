@@ -8,6 +8,7 @@ import { getError } from "../../utils/error";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
+import { data } from "autoprefixer";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -102,6 +103,7 @@ function OrderScreen() {
       dispatch({ type: "DELIVER_FAIL", payload: getError(err) });
       toast.error(getError(err));
     }
+    console.log(data);
   }
 
   // function onApprove(data, actions) {
@@ -221,17 +223,16 @@ function OrderScreen() {
                     <div>₱{totalPrice}</div>
                   </div>
                 </li>
-                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
-                  <li>
-                    {loadingDeliver && <div>Loading...</div>}
-                    <button
-                      className="primary-button w-full"
-                      onClick={deliverOrderHandler}
-                    >
-                      Deliver Order
-                    </button>
-                  </li>
-                )}
+
+                <li>
+                  {loadingDeliver && <div>Loading...</div>}
+                  <button
+                    className="primary-button w-full"
+                    onClick={deliverOrderHandler}
+                  >
+                    Deliver Order
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
