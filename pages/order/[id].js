@@ -224,15 +224,17 @@ function OrderScreen() {
                   </div>
                 </li>
 
-                <li>
-                  {loadingDeliver && <div>Loading...</div>}
-                  <button
-                    className="primary-button w-full"
-                    onClick={deliverOrderHandler}
-                  >
-                    Deliver Order
-                  </button>
-                </li>
+                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                  <li>
+                    {loadingDeliver && <div>Loading...</div>}
+                    <button
+                      className="primary-button w-full"
+                      onClick={deliverOrderHandler}
+                    >
+                      Deliver Order
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
