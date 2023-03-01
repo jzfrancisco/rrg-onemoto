@@ -160,13 +160,12 @@ export default function PlaceOrderScreen() {
                   </div>
                 </li>
                 <li>
-                  {loading ? "Loading..." : "Place Order"}
                   <button
                     disabled={loading}
                     onClick={placeOrderHandler}
                     className="primary-button w-full"
                   >
-                    Deliver order
+                    {loading ? "Loading..." : "Place Order"}
                   </button>
                 </li>
               </ul>
