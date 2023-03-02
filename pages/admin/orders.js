@@ -47,7 +47,7 @@ export default function AdminOrderScreen() {
             </li>
             <li>
               <Link href="/admin/orders">
-                <a className="font-bold">Orders</a>
+                <div className="font-bold">Orders</div>
               </Link>
             </li>
             <li>
@@ -93,7 +93,7 @@ export default function AdminOrderScreen() {
                       <td className="p-5">
                         {order.isPaid
                           ? `${order.paidAt.substring(0, 10)}`
-                          : "not paid"}
+                          : "Paid when item is delivered"}
                       </td>
                       <td className="p-5">
                         {order.isDelivered
@@ -102,7 +102,7 @@ export default function AdminOrderScreen() {
                       </td>
                       <td className="p-5">
                         <Link href={`/order/${order._id}`} passHref>
-                          <a>Details</a>
+                          <div>Details</div>
                         </Link>
                       </td>
                     </tr>

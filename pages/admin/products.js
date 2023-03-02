@@ -105,7 +105,7 @@ export default function AdminProdcutsScreen() {
             </li>
             <li>
               <Link href="/admin/products">
-                <a className="font-bold">Products</a>
+                <div className="font-bold">Products</div>
               </Link>
             </li>
             <li>
@@ -137,7 +137,7 @@ export default function AdminProdcutsScreen() {
                     <th className="px-5 text-left">ID</th>
                     <th className="p-5 text-left">NAME</th>
                     <th className="p-5 text-left">PRICE</th>
-                    <th className="p-5 text-left">CATEGORY</th>
+                    {/* <th className="p-5 text-left">CATEGORY</th> */}
                     <th className="p-5 text-left">COUNT</th>
                     <th className="p-5 text-left">RATING</th>
                     <th className="p-5 text-left">ACTIONS</th>
@@ -149,14 +149,14 @@ export default function AdminProdcutsScreen() {
                       <td className=" p-5 ">{product._id.substring(20, 24)}</td>
                       <td className=" p-5 ">{product.name}</td>
                       <td className=" p-5 ">₱{product.price}</td>
-                      <td className=" p-5 ">{product.category}</td>
+                      {/* <td className=" p-5 ">{product.category}</td> */}
                       <td className=" p-5 ">{product.countInStock}</td>
                       <td className=" p-5 ">{product.rating}</td>
                       <td className=" p-5 ">
                         <Link href={`/admin/product/${product._id}`}>
-                          <a type="button" className="default-button">
+                          <div type="button" className="default-button">
                             Edit
-                          </a>
+                          </div>
                         </Link>
                         &nbsp;
                         <button

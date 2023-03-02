@@ -143,7 +143,7 @@ function OrderScreen() {
               {isdDelivered ? (
                 <div className="alert-success">Delivered at {deliveredAt}</div>
               ) : (
-                <div className="alert-error">Not delivered</div>
+                <div className="alert-error">Paid when item is delivered</div>
               )}
             </div>
             <div className="card p-5">
@@ -223,20 +223,19 @@ function OrderScreen() {
                     <div>₱{totalPrice}</div>
                   </div>
                 </li>
-
-                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
-                  <li>
-                    {loadingDeliver && <div>Loading...</div>}
-                    <button
-                      className="primary-button w-full"
-                      onClick={deliverOrderHandler}
-                    >
-                      Deliver Order
-                    </button>
-                  </li>
-                )}
               </ul>
             </div>
+            {session.user.isAdmin && !order.isDelivered && (
+              <li>
+                {loadingDeliver && <div>Loading...</div>}
+                <button
+                  className="primary-button w-full"
+                  onClick={deliverOrderHandler}
+                >
+                  Deliver Order
+                </button>
+              </li>
+            )}
           </div>
         </div>
       )}

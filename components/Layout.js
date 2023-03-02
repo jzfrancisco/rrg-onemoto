@@ -57,7 +57,7 @@ export default function Layout({ title, children }) {
                   <Menu.Button className="text-blue-600">
                     {session.user.name}
                   </Menu.Button>
-                  <Menu.Items className="absolute z-50 right-0 w-56 origin-top-right bg-white shadow-lg">
+                  <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
                     <Menu.Item>
                       <DropdownLink className="dropdown-link" href="/profile">
                         Profile
@@ -71,20 +71,30 @@ export default function Layout({ title, children }) {
                         Order History
                       </DropdownLink>
                     </Menu.Item>
+                    {session.user.isAdmin && (
+                      <Menu.Item>
+                        <DropdownLink
+                          className="dropdown-link"
+                          href="/admin/dashboard"
+                        >
+                          Admin Dashboard
+                        </DropdownLink>
+                      </Menu.Item>
+                    )}
                     <Menu.Item>
-                      <DropdownLink
+                      <div
                         className="dropdown-link"
-                        href="/#"
+                        href="#"
                         onClick={logoutClickHandler}
                       >
                         Logout
-                      </DropdownLink>
+                      </div>
                     </Menu.Item>
                   </Menu.Items>
                 </Menu>
               ) : (
                 <Link href="/login">
-                  <h1 className="p-2"> Login</h1>
+                  <div className="p-2">Login</div>
                 </Link>
               )}
             </div>
