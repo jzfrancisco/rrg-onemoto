@@ -116,9 +116,9 @@ function AdminUsersScreen() {
                       <td className=" p-5 ">{user.isAdmin ? "YES" : "NO"}</td>
                       <td className=" p-5 ">
                         <Link href={`/admin/user/${user._id}`} passHref>
-                          <a type="button" className="default-button">
+                          <div type="button" className="default-button">
                             Edit
-                          </a>
+                          </div>
                         </Link>
                         &nbsp;
                         <button
