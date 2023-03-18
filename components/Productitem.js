@@ -4,7 +4,7 @@ import React from "react";
 
 function Productitem({ products, addToCartHandler }) {
   return (
-    <div className="card">
+    <div className="card ">
       <Link href={`/product/${products.slug}`}>
         <p className="h-56 p-6 rounded-lg overflow-hidden relative ">
           <Image

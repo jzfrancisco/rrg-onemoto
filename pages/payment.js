@@ -43,7 +43,7 @@ export default function PaymentScreen() {
     <Layout title="Payment Method">
       <CheckoutWizard activeStep={2} />
       <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
-        {["Cash On Delivery"].map((payment) => (
+        {["Cash On Delivery, Paypal"].map((payment) => (
           <div key={payment} className="mb-4">
             <input
               name="paymentMethod"

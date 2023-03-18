@@ -111,6 +111,7 @@ export default function AdminProductEditScreen() {
     brand,
     countInStock,
     description,
+    imageFile,
   }) => {
     try {
       dispatch({ type: "UPDATE_REQUEST" });
@@ -123,6 +124,7 @@ export default function AdminProductEditScreen() {
         brand,
         countInStock,
         description,
+        imageFile
       });
       dispatch({ type: "UPDATE_SUCCESS" });
       toast.success("Product updated successfully");

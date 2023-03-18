@@ -27,18 +27,28 @@ export default function LoginScreen() {
     getValues,
     formState: { errors },
   } = useForm();
-  const submitHandler = async ({ name, email, password }) => {
+  const submitHandler = async ({
+    name,
+    email,
+    password,
+    address,
+    contactNumber,
+  }) => {
     try {
       await axios.post("/api/auth/signup", {
         name,
         email,
         password,
+        address,
+        contactNumber,
       });
 
       const result = await signIn("credentials", {
         redirect: false,
         email,
         password,
+        address,
+        contactNumber,
       });
       if (result.error) {
         toast.error(result.error);
@@ -54,6 +64,7 @@ export default function LoginScreen() {
         onSubmit={handleSubmit(submitHandler)}
       >
         <h1 className="mb-4 text-xl">Create Account</h1>
+        {/* Fullname */}
         <div className="mb-4">
           <label htmlFor="name">Name</label>
           <input
@@ -69,7 +80,7 @@ export default function LoginScreen() {
             <div className="text-red-500">{errors.name.message}</div>
           )}
         </div>
-
+        {/* Email */}
         <div className="mb-4">
           <label htmlFor="email">Email</label>
           <input
@@ -88,6 +99,42 @@ export default function LoginScreen() {
             <div className="text-red-500">{errors.email.message}</div>
           )}
         </div>
+        {/* Address */}
+        <div className="mb-4">
+          <label htmlFor="email">Address</label>
+          <input
+            {...register("address", {
+              required: "Please enter address",
+              pattern: {
+                message: "Please enter valid address",
+              },
+            })}
+            className="w-full"
+            id="address"
+          ></input>
+          {errors.address && (
+            <div className="text-red-500">{errors.address.message}</div>
+          )}
+        </div>
+        {/* Contact Number */}
+        <div className="mb-4">
+          <label htmlFor="address">Contact Number</label>
+          <input
+            type="number"
+            {...register("contactNumber", {
+              required: "Please enter contact number",
+              pattern: {
+                message: "Please enter valid contact number",
+              },
+            })}
+            className="w-full"
+            id="contactNumber"
+          ></input>
+          {errors.contactNumber && (
+            <div className="text-red-500">{errors.contactNumber.message}</div>
+          )}
+        </div>
+        {/* Password */}
         <div className="mb-4">
           <label htmlFor="password">Password</label>
           <input
@@ -104,6 +151,7 @@ export default function LoginScreen() {
             <div className="text-red-500 ">{errors.password.message}</div>
           )}
         </div>
+        {/* Confirm Password */}
         <div className="mb-4">
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -129,7 +177,7 @@ export default function LoginScreen() {
               <div className="text-red-500 ">Password do not match</div>
             )}
         </div>
-
+        {/* Button Register */}
         <div className="mb-4 ">
           <button className="primary-button">Register</button>
         </div>
