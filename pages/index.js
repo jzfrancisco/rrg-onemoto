@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import Brands from "../components/Brands";
+// import Brands from "../components/Brands";
 
 import motor from "../public/images/kawasaki2.png";
 
@@ -89,6 +89,7 @@ export default function Home({ products }) {
           </div>
         </div>
       </div>
+      {/*  */}
       <br />
       {/* <div>
         <Brands />
