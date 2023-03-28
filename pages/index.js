@@ -34,7 +34,7 @@ export default function Home({ products }) {
     <Layout title="Home Page">
       {/* Introduction */}
       <div className="max-w-full">
-        <div className="flex flex-wrap justify-between items-start px-1 bg-[#000000b7] p-5 shadow-xl shadow-black rounded-[10px]">
+        <div className="flex flex-wrap justify-between items-start px-1 bg-[#000000b7] p-5 shadow-lg shadow-black rounded-[10px]">
           <div className="py-3 px-3 flex ">
             <div className="max-w-full lg:w-[800px] ">
               <motion.h1
@@ -43,7 +43,7 @@ export default function Home({ products }) {
                 exit={{ x: -100, opacity: 0 }}
                 className="px-2 font-extrabold text-2xl lg:text-[36px] text-[#ffffff] py-3 text-left "
               >
-                Welcome to our motorshop
+                Welcome to our Motorshop
               </motion.h1>
               <motion.p
                 initial={{ x: -100, opacity: 0 }}
