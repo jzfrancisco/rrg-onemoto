@@ -52,7 +52,7 @@ export default function Home({ products }) {
                 className="text-[#ffffff] text-base lg:text-xl py-2 px-2 font-semibold"
               >
                 Where we offer top-quality products and services for all your
-                motorcycling needs. Whether you're a seasoned rider or a
+                motorcycling needs. Whether youre a seasoned rider or a
                 beginner, we have everything you need to enjoy the open road
                 with confidence and style.
               </motion.p>
