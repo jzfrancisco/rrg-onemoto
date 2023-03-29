@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 // import Brands from "../components/Brands";
 
-import motor from "../public/images/kawasaki2.png";
+// import motor from "../public/images/kawasaki2.png";
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
