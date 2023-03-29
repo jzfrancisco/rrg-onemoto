@@ -35,13 +35,13 @@ export default function Home({ products }) {
       {/* Introduction */}
       <div className="max-w-full">
         <div className="flex flex-wrap justify-between items-start px-1 bg-[#000000b7] p-5 shadow-lg shadow-black rounded-[10px]">
-          <div className="py-3 px-3 flex ">
-            <div className="max-w-full lg:w-[800px] ">
+          <div className="py-3 px-2 flex ">
+            <div className="max-w-full lg:w-[550px] ">
               <motion.h1
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
-                className="px-2 font-extrabold text-2xl lg:text-[36px] text-[#ffffff] py-3 text-left "
+                className="px-2 font-extrabold text-xl lg:text-[36px] text-[#ffffff] py-3 text-left leading-10"
               >
                 Welcome to our Motorshop
               </motion.h1>
@@ -49,7 +49,7 @@ export default function Home({ products }) {
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
-                className="text-[#ffffff] text-base lg:text-xl py-2 px-2 font-semibold"
+                className="text-[#ffffff] text-base lg:text-xl py-1 px-2 font-semibold"
               >
                 Where we offer top-quality products and services for all your
                 motorcycling needs. Whether youre a seasoned rider or a
@@ -78,7 +78,7 @@ export default function Home({ products }) {
               </motion.p>
             </div>
           </div>
-          <div className="py-5 px-5">
+          <div className="py-5 px-4">
             <motion.div
               initial={{ y: -300, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
