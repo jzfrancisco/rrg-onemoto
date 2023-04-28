@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 
 // import Brands from "../components/Brands";
 
-import motor from 'public/images/kawasaki2.png';
+// import motor from 'public/images/kawasaki2.png';
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
@@ -82,7 +82,7 @@ export default function Home({ products }) {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 300, opacity: 0 }}
             >
-              <Image src={motor} alt='/' />
+              {/* <Image src={motor} alt='/' /> */}
             </motion.div>
           </div>
         </div>
