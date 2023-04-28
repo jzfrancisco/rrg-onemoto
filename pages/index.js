@@ -1,18 +1,18 @@
-"use client";
-import Layout from "../components/Layout";
-import ProductItem from "../components/Productitem";
-import db from "../utils/db";
-import Product from "../models/Product";
-import React, { useContext } from "react";
-import { Store } from "@/utils/Store";
-import axios from "axios";
-import { toast } from "react-toastify";
-import Image from "next/image";
-import { motion } from "framer-motion";
+'use client';
+import Layout from '../components/Layout';
+import ProductItem from '../components/Productitem';
+import db from '../utils/db';
+import Product from '../models/Product';
+import React, { useContext } from 'react';
+import { Store } from '@/utils/Store';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 // import Brands from "../components/Brands";
 
-import motor from "../public/images/kawasaki2.png";
+import motor from '../public/images/kawasaki2.png';
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
@@ -24,24 +24,24 @@ export default function Home({ products }) {
     const { data } = await axios.get(`/api/products/${products._id}`);
 
     if (data.countInStock < quantity) {
-      return toast.error("Sorry. Product is out of stock");
+      return toast.error('Sorry. Product is out of stock');
     }
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...products, quantity } });
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...products, quantity } });
 
-    toast.success("Product added to the cart");
+    toast.success('Product added to the cart');
   };
   return (
-    <Layout title="Home Page">
+    <Layout title='Home Page'>
       {/* Introduction */}
-      <div className="max-w-full">
-        <div className="flex flex-wrap justify-between items-start px-1 bg-[#000000b7] p-5 shadow-lg shadow-black rounded-[10px]">
-          <div className="py-3 px-2 flex ">
-            <div className="max-w-full lg:w-[550px] ">
+      <div className='max-w-full'>
+        <div className='flex flex-wrap justify-between items-start px-1 bg-[#000000b7] p-5 shadow-lg shadow-black rounded-[10px]'>
+          <div className='py-3 px-2 flex '>
+            <div className='max-w-full lg:w-[550px] '>
               <motion.h1
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
-                className="px-2 font-extrabold text-xl lg:text-[36px] text-[#ffffff] py-3 text-left leading-10"
+                className='px-2 font-extrabold text-xl lg:text-[36px] text-[#ffffff] py-3 text-left leading-10'
               >
                 Welcome to our Motorshop
               </motion.h1>
@@ -49,42 +49,40 @@ export default function Home({ products }) {
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
-                className="text-[#ffffff] text-base lg:text-xl py-1 px-2 font-semibold"
+                className='text-[#ffffff] text-base lg:text-xl py-1 px-2 font-semibold'
               >
-                Where we offer top-quality products and services for all your
-                motorcycling needs. Whether youre a seasoned rider or a
-                beginner, we have everything you need to enjoy the open road
-                with confidence and style.
+                Where we offer top-quality products and services for all your motorcycling needs.
+                Whether youre a seasoned rider or a beginner, we have everything you need to enjoy
+                the open road with confidence and style.
               </motion.p>
               <motion.p
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
-                className="text-[#ffffff] text-base lg:text-xl py-2 px-2 font-semibold"
+                className='text-[#ffffff] text-base lg:text-xl py-2 px-2 font-semibold'
               >
-                Our shop features a wide range of motorcycles, from sleek
-                sportbikes to rugged adventure bikes, as well as all the gear
-                and accessories you need to stay safe and comfortable while
-                riding.
+                Our shop features a wide range of motorcycles, from sleek sportbikes to rugged
+                adventure bikes, as well as all the gear and accessories you need to stay safe and
+                comfortable while riding.
               </motion.p>
               <motion.p
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
-                className="text-[#ffffff] text-base lg:text-xl py-2 px-2 font-semibold"
+                className='text-[#ffffff] text-base lg:text-xl py-2 px-2 font-semibold'
               >
-                So why wait? Come shop with us today and discover the thrill of
-                motorcycling for yourself!
+                So why wait? Come shop with us today and discover the thrill of motorcycling for
+                yourself!
               </motion.p>
             </div>
           </div>
-          <div className="py-5 px-4">
+          <div className='py-5 px-4'>
             <motion.div
               initial={{ y: -300, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 300, opacity: 0 }}
             >
-              <Image src={motor} alt="/" />
+              <Image src={motor} alt='/' />
             </motion.div>
           </div>
         </div>
@@ -95,8 +93,8 @@ export default function Home({ products }) {
         <Brands />
       </div> */}
       {/* Products */}
-      <h1 className="text-xl font-semibold py-5">Products</h1>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 ">
+      <h1 className='text-xl font-semibold py-5'>Products</h1>
+      <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 '>
         {products.map((products) => (
           <ProductItem
             products={products}
