@@ -1,9 +1,9 @@
-"use client";
-import "@/styles/globals.css";
-import { StoreProvider } from "@/utils/Store";
-import { SessionProvider, useSession } from "next-auth/react";
+'use client';
+import '@/styles/globals.css';
+import { StoreProvider } from '@/utils/Store';
+import { SessionProvider, useSession } from 'next-auth/react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -26,10 +26,10 @@ function Auth({ children }) {
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
-      router.push("/unauthorized?message=login required");
+      router.push('/unauthorized?message=login required');
     },
   });
-  if (status === "loading") {
+  if (status === 'loading') {
     return <div>Loading...</div>;
   }
   return children;
