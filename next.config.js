@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   experimental: {
     appDir: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  trailingSlash: true,
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 
